@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Parsedown</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+  <!-- marked.js is bundled locally (vendored) so the app stays fully offline. -->
+  <script src="/static/marked.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">¶</span>
+      <span class="brand-name">Parsedown</span>
+    </div>
+    <button id="theme-toggle" class="icon-btn" title="Toggle light/dark" aria-label="Toggle theme">
+      <span class="theme-icon">◐</span>
+    </button>
+  </header>
+
+  <div class="layout">
+    <!-- History sidebar (the local "memory" of past conversions) -->
+    <aside class="sidebar">
+      <div class="sidebar-head">
+        <h2 class="sidebar-title">History</h2>
+        <button id="clear-history" class="link-btn" title="Clear all history">Clear</button>
+      </div>
+      <input id="history-search" class="search" type="search"
+             placeholder="Search files & text…" />
+      <ul id="history-list" class="history-list"></ul>
+      <p id="history-empty" class="history-empty">No conversions yet.</p>
+    </aside>
+
+    <main class="content">
+      <p class="tagline">Shrink PDFs, Word, PowerPoint, Excel &amp; images into token-efficient Markdown for AI — entirely on your machine.</p>
+
+      <!-- Drag-and-drop zone (clicking also opens the file picker) -->
+      <section id="dropzone" class="dropzone" tabindex="0" role="button"
+               aria-label="Drop files or click to browse">
+        <input id="file-input" type="file" multiple hidden
+               accept=".pdf,.docx,.pptx,.xlsx,.png,.jpg,.jpeg,.tif,.tiff,.bmp,.gif,.webp" />
+        <div class="drop-inner">
+          <div class="drop-icon">⬇</div>
+          <p class="drop-title">Drop files here</p>
+          <p class="drop-sub">PDF · Word · PowerPoint · Excel · images — click to browse, paste (⌘V), or drop several for batch</p>
+        </div>
+      </section>
+
+      <!-- Transient status / error messages -->
+      <div id="status" class="status" hidden></div>
+
+      <!-- Batch summary bar (only shown after a multi-file conversion) -->
+      <div id="batch-bar" class="batch-bar" hidden>
+        <span id="batch-text"></span>
+        <button id="download-all" class="btn btn-accent">Download all (.zip)</button>
+      </div>
+
+      <!-- Results, hidden until something is selected -->
+      <section id="results" class="results" hidden>
+        <div class="results-head">
+          <div class="result-meta">
+            <h2 id="result-name" class="result-name"></h2>
+            <span id="result-type" class="badge"></span>
+          </div>
+          <div class="result-actions">
+            <button id="copy-btn" class="btn">Copy</button>
+            <button id="download-btn" class="btn btn-accent">Download .md</button>
+          </div>
+        </div>
+
+        <!-- Stats strip -->
+        <div id="stats" class="stats">
+          <div class="stat"><span class="stat-label">Original</span><span id="stat-orig" class="stat-val">—</span></div>
+          <div class="stat"><span class="stat-label">Markdown</span><span id="stat-out" class="stat-val">—</span></div>
+          <div class="stat"><span class="stat-label">Reduction</span><span id="stat-red" class="stat-val">—</span></div>
+          <div class="stat"><span class="stat-label">~Tokens</span><span id="stat-tok" class="stat-val">—</span></div>
+        </div>
+
+        <!-- View toggle: rendered preview vs raw source -->
+        <div class="view-toggle">
+          <button id="view-rendered" class="toggle-btn active">Preview</button>
+          <button id="view-raw" class="toggle-btn">Raw</button>
+        </div>
+
+        <article id="preview-rendered" class="preview markdown-body"></article>
+        <pre id="preview-raw" class="preview raw" hidden><code></code></pre>
+      </section>
+    </main>
+  </div>
+
+  <footer class="footer">Runs locally · no files leave your machine</footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

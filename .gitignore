@@ -1,0 +1,18 @@
+# --- Virtual environment (machine-specific, large — never commit) ---
+venv/
+.venv/
+
+# --- Local conversion history (your personal data) ---
+history.db
+
+# --- Python caches ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# --- macOS clutter ---
+.DS_Store
+
+# --- Editor / IDE folders ---
+.vscode/
+.idea/

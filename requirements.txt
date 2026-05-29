@@ -1,0 +1,20 @@
+# Parsedown dependencies
+
+# --- Core (PDF path + web server) ---
+fastapi
+uvicorn[standard]
+python-multipart        # required by FastAPI for file uploads
+pymupdf4llm             # PDF -> Markdown engine (pulls in PyMuPDF)
+
+# --- Secondary file types ---
+pytesseract             # image OCR (needs the system Tesseract binary, see README)
+Pillow                  # image loading for OCR
+mammoth                 # .docx -> Markdown
+python-pptx             # .pptx -> Markdown
+openpyxl                # .xlsx -> Markdown
+
+# History is stored with Python's built-in sqlite3 — no extra package needed.
+
+# --- Used only by the bundled test script (python test_app.py) ---
+reportlab               # generates the sample PDF
+httpx                   # required by FastAPI's TestClient
