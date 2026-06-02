@@ -34,6 +34,8 @@ uvicorn main:app --reload
 
 Then open **http://127.0.0.1:8000** in your browser.
 
+**Double-click launchers:** once the steps above are done, you don't need the terminal again — just double-click **`run.command`** on macOS or **`run.bat`** on Windows. Either one starts the server, waits for it to come up, and opens the app in your browser automatically. Leave the window it opens open while you use the app; press Ctrl+C (or close it) to stop the server.
+
 ## How to use
 
 1. Drag a file onto the drop zone (or click it to browse). Drop **several at once** for batch mode.
@@ -78,6 +80,8 @@ static/index.html    single-page UI (dropzone, history sidebar, preview)
 static/styles.css    styling (light/dark, system fonts)
 static/app.js        frontend logic (drag-drop, batch, history, preview)
 static/marked.min.js vendored Markdown renderer (offline)
+run.command          double-click launcher (macOS)
+run.bat              double-click launcher (Windows)
 test_app.py          end-to-end smoke test (generates sample PDF/PPTX/XLSX)
 requirements.txt
 history.db           local conversion history (created on first run)
